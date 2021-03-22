@@ -69,7 +69,7 @@ const createApp = () => {
       {
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
         consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-        callbackURL: "http://localhost:3000/auth/twitter/callback",
+        callbackURL: "//auth/twitter/callback",
       },
       async (accessToken, accessTokenSecret, profile, cb) => {
         try {
