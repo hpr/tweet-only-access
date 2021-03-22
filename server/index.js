@@ -138,7 +138,7 @@ const createApp = () => {
   if (prod) {
     app.use(express.static(path.resolve("../build")));
     app.get("*", (req, res) => {
-      res.sendFile(path.resolve("../build/index.html"));
+      res.sendFile(path.resolve("../public/index.html"));
     });
   } else {
     port = 3001;
