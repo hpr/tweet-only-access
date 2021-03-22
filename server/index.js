@@ -5,7 +5,7 @@ const Sequelize = require("sequelize");
 const TwitterStrategy = require("passport-twitter").Strategy;
 const path = require("path");
 const crypto = require("crypto");
-const { TwitterClient } = require('twitter-api-client');
+const { TwitterClient } = require("twitter-api-client");
 
 let port = process.env.PORT || 3000;
 const prod = process.env.NODE_ENV === "production";
@@ -69,7 +69,9 @@ const createApp = () => {
       {
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
         consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-        callbackURL: "//auth/twitter/callback",
+        callbackURL: prod
+          ? "https://tweet-only-access.herokuapp.com/auth/twitter/callback"
+          : "http://localhost:3000/auth/twitter/callback",
       },
       async (accessToken, accessTokenSecret, profile, cb) => {
         try {
@@ -111,10 +113,10 @@ const createApp = () => {
         apiKey: process.env.TWITTER_CONSUMER_KEY,
         apiSecret: process.env.TWITTER_CONSUMER_SECRET,
         accessToken: tweeter.accessToken,
-        accessTokenSecret: tweeter.accessTokenSecret
+        accessTokenSecret: tweeter.accessTokenSecret,
       });
       const data = await twitterClient.tweets.statusesUpdate({
-        status: req.body.tweet
+        status: req.body.tweet,
       });
       res.send(data);
     } catch (err) {
@@ -128,7 +130,7 @@ const createApp = () => {
         where: { urlCode: req.params.urlCode },
       });
       res.send({
-        username: tweeter.username
+        username: tweeter.username,
       });
     } catch (err) {
       next(err);
