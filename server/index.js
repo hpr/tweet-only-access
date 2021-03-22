@@ -136,9 +136,9 @@ const createApp = () => {
   });
 
   if (prod) {
-    app.use(express.static(path.resolve("../build")));
+    app.use(express.static(path.join(__dirname, "../build")));
     app.get("*", (req, res) => {
-      res.sendFile(path.resolve("../public/index.html"));
+      res.sendFile(path.join(__dirname, "../public/index.html"));
     });
   } else {
     port = 3001;
