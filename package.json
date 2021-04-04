@@ -33,15 +33,15 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "npm run production",
+    "start": "NODE_ENV=production npm run server",
     "seed": "node seed",
     "dev": "NODE_ENV=development concurrently --kill-others \"npm run client\" \"nodemon server\"",
-    "production": "npm run build && NODE_ENV=production npm run server",
     "client": "react-scripts start",
     "server": "node server",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "./deploy.sh"
   },
   "eslintConfig": {
     "extends": [
